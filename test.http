@@ -1,0 +1,30 @@
+# Consultar productos
+GET http://localhost:4000/products HTTP/1.1
+
+# Agregar Producto
+# POST http://localhost:4000/products HTTP/1.1
+# Authorization: token xxx
+# content-type: application/json
+
+# {
+#     "name": "Printer",
+#     "price": 250,
+#     "quantity": 14
+# }
+
+
+# Modificar producto
+# PUT http://localhost:4000/products/laptop HTTP/1.1
+# Authorization: token xxx
+# content-type: application/json
+
+# {
+#     "name": "Laptop",
+#     "price": 225.67,
+#     "quantity": 140
+# }
+
+
+
+# Borrar producto
+#DELETE http://localhost:4000/products/monitor HTTP/1.1
