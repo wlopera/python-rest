@@ -1,0 +1,26 @@
+{% extends "layout.html" %} {% block content %}
+<div class="px-5 mx-5 mt-5 div-table">
+  <h1>Productos</h1>
+  <hr />
+
+  <table class="table table-bordered table-striped table-hover">
+    <thead>
+      <tr>
+        {% for header in headers %}
+        <th>{{header}}</th>
+        {% endfor %}
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for row in tableData %}
+      <tr>
+        <td>{{row['name']}}</td>
+        <td>{{row['price']}}</td>
+        <td>{{row['quantity']}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
