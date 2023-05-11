@@ -24,7 +24,5 @@ GET http://localhost:4000/products HTTP/1.1
 #     "quantity": 140
 # }
 
-
-
 # Borrar producto
-#DELETE http://localhost:4000/products/monitor HTTP/1.1
+# DELETE http://localhost:4000/products/laptop HTTP/1.1
