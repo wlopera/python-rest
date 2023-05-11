@@ -235,3 +235,114 @@ Uso de Pluggin Rest Client de VSCODE para probar consultar HTTP
 * Borrar producto
 
 ![Captura6](https://github.com/wlopera/python-rest/assets/7141537/2dda0fa2-7ddb-4b61-bf6c-1720189de9c2)
+
+## Agregar Templates y Servicio WEB
+```
+------------------------------------------------------------------------------------
+Agregar Servicio Web:
+------------------------------------------------------------------------------------
+ Crear servidor web con routes a las paginas a mostrar
+------------------------------------------------------------------------------------
+from flask import Flask, render_template
+import requests
+
+web=Flask(__name__)
+
+#---------------------- Routes
+@web.route('/table')
+def getProducts():
+    response = requests.get("http://127.0.0.1:4000/products")
+    headers=['Nombre', 'Precio', 'Cantidad']
+    tableData=response.json()['products']
+
+    return render_template(
+        'table.html',
+        headers=headers,
+        tableData=tableData
+    )
+ 
+@web.route('/about')
+def about():
+    return render_template('about.html')
+
+@web.route('/pythonweb')
+def pythonWeb():
+    return render_template('pythonWEB.html')
+
+#---------------------- Levantar servidor web
+if __name__=='__main__':
+    web.run(debug=True, port=5000)
+------------------------------------------------------------------------------------
+Crear templates
+------------------------------------------------------------------------------------
+- layout.html
+    > Cabecera de navegacion y sitio para inscustar html dinamicos
+    ...
+    <div class="container p-4 ">
+        {% block content %} 
+        {% endblock %}
+    </div>
+
+- table.html
+{% extends "layout.html" %} {% block content %}
+<div class="px-5 mx-5 mt-5 div-table">
+  <h1>Productos</h1>
+  <hr />
+
+  <table class="table table-bordered table-striped table-hover">
+    <thead>
+      <tr>
+        {% for header in headers %}
+        <th>{{header}}</th>
+        {% endfor %}
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for row in tableData %}
+      <tr>
+        <td>{{row['name']}}</td>
+        <td>{{row['price']}}</td>
+        <td>{{row['quantity']}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
+
+- pythonweb.html
+{% extends "layout.html" %} 
+
+{% block content %}    
+    <div class="card text-center">
+        <div class="card-header">
+          APP Python
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Servicio API Rest - WEB</h5>
+          <p class="card-text">Aplicación para estudiar Python .</p>
+          <img src="..\static\image\python.png" width="300" height="300" alt="python" loading="lazy">
+        </div>
+        <div class="card-footer text-muted">
+          @wlopera - 2023
+        </div>
+      </div>
+{% endblock %}
+------------------------------------------------------------------------------------
+
+- Agregar estilos porpios CSS  y  Bootstrap 4
+- Agregar libreria para consulta de API (Client API)
+    - pip install requests 
+
+------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
+```
+
+### Salida
+![Captura1](https://github.com/wlopera/python-rest/assets/7141537/cf1dfa4a-6bc9-4afb-b309-03a9dc57ce7d)
+![Captura](https://github.com/wlopera/python-rest/assets/7141537/0fea425d-c7a1-4129-af9e-541333cc9a55)
+![Captura2](https://github.com/wlopera/python-rest/assets/7141537/67f6f02d-1349-426a-bb19-e6cbe7c079f4)
+
+
